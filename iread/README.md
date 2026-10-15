@@ -11,13 +11,14 @@ ICU에서 일반병동으로 옮긴 뒤 다시 중환자 치료가 필요해질 
 > - 결과는 집계값만 있으며, 1–9건인 칸은 `<10`으로 가렸습니다.
 
 ## 결과 요약
-결과와 해석·한계는 `results/REPORT_FINAL.pdf`, 분석 대상 기술통계는 `results/DESC_STATS_B1.pdf`에 있습니다.
 - 대표 분석: 성인 ICU 퇴실 사례 83,792건(환자 59,261명). 실제 ICU 퇴실 시각까지의 정보로, 같은 입원 중 48시간 안의 ICU 재입실 또는 재입실 전 사망을 예측했습니다.
 - 평가 자료(23,542건)의 결과
   - 복합결과 AUROC 0.728
   - 같은 경고 기준에서 재입실 포착 29.8%, 재입실 전 사망 포착 94.9%
   - 복합결과 성능을 재입실 예측 성능으로 해석할 수 없습니다.
 - 평가 결과를 본 뒤 정의를 수정한 **탐색적 분석**입니다. 대상에 일반병동 전실 여부가 확인되지 않은 사례가 포함됩니다.
+
+> 최종 보고서(`results/`)는 저장소에 포함되지 않습니다.
 
 ## 폴더 구성
 | 경로 | 내용 |
@@ -28,9 +29,9 @@ ICU에서 일반병동으로 옮긴 뒤 다시 중환자 치료가 필요해질 
 | `05_` – `13_*.py` | 진단, SHAP, 보정, 사건별·경로별 분석, 재입실 직접 학습, 퇴실 직후 위치, 민감도, 기술통계 |
 | `safe/` | 안전 실행 도구: 출력 스키마를 검사해 집계값만 통과시키고, 1–9건을 가리고, 원문 로그를 분리 |
 | `run_safe.sh` | 단계별 실행 진입점 |
-| `evidence/` | 가상(합성) 경계 사례 생성·검사 코드, 코드 해시(manifest), 합성 데이터 시험 로그 |
 | `internal/` | 소유자 전용 내부 열람 보고서 생성기. 결과물은 저장소 밖에 생성되며 공개하지 않음 |
-| `results/` | 최종 보고서, 기술통계, 집계 결과(jsonl), 그림 |
+| `results/` *(제외)* | 최종 보고서, 기술통계, 그림 — 저장소에 포함하지 않음 |
+| `evidence/` *(제외)* | 합성 경계 사례 생성·검사 코드 및 시험 로그 — 저장소에 포함하지 않음 |
 
 ## 실행 방법
 1. 환경을 준비합니다. Python 3.12 이상과 `duckdb`, `pandas`, `pyarrow`, `scikit-learn`, `lightgbm`, `torch`, `shap`, `matplotlib`이 필요합니다.
@@ -51,7 +52,7 @@ ICU에서 일반병동으로 옮긴 뒤 다시 중환자 치료가 필요해질 
    ```
 
 ## 원자료 없이 코드 확인하기 (합성 데이터)
-`evidence/edge_gen.py`, `evidence/edge_gen_x.py`, `internal/synth_browse.py`는 손으로 만든 가상 사례를 MIMIC 형식으로 생성합니다. 실제 환자 기록에서 만든 것이 아닙니다.
+`internal/synth_browse.py`는 손으로 만든 가상 사례를 MIMIC 형식으로 생성합니다. 실제 환자 기록에서 만든 것이 아닙니다.
 ```bash
 python internal/synth_browse.py /tmp/synth/data /tmp/synth/work
 MIMIC_DIR=/tmp/synth/data IREAD_WORK=/tmp/synth/work python 02_cohort.py
@@ -68,4 +69,4 @@ MIMIC_DIR=/tmp/synth/data IREAD_WORK=/tmp/synth/work python 02_cohort.py
 - Johnson A, et al. MIMIC-IV (version 3.1). PhysioNet. 2024. doi:10.13026/kpb9-mt58
 
 ## 라이선스
-(팀 결정 후 기재)
+MIT License (코드에 한함) — 데이터·결과물에는 MIMIC-IV DUA가 별도로 적용됩니다.
