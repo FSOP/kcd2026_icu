@@ -1,0 +1,53 @@
+# ── 실행 증거 로그 (합성/실데이터 혼재 가능성, 보수적 제외) ──
+evidence/
+
+# ── 내부 운영 문서 (계정·권한·격리 정책, 공개 불필요) ──
+internal/ISOLATION.md
+
+# ── 원자료·파생 자료 (MIMIC-IV DUA: 데이터는 절대 공개하지 않음) ──
+# 원자료와 파생 자료는 이 폴더 밖(~/KCD2026/datasets, work, private_logs, private_reports)에 있지만, 실수로 복사되는 것을 막는다.
+datasets/
+work/
+private_logs/
+private_reports/
+logs/
+*.csv
+*.csv.gz
+*.parquet
+*.feather
+*.npy
+*.npz
+*.h5
+*.db
+*.sqlite
+
+# ── 학습된 모델·예측 (가중치는 공개 보류) ──
+*.pt
+*.pth
+*.pkl
+*.joblib
+*.onnx
+*.ckpt
+*.txt.model
+preds_*
+thresholds_*
+params_*
+final_done_*
+
+# ── 중간 판 보고서 (최종본만 공개) ──
+results/REPORT_TEAM*
+results/REPORT_W5.md
+results/*_html.zip
+results/fig[1-5]_*.png
+
+# ── 실행 환경·캐시 ──
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# ── 인증 정보 ──
+.env
+.hdr
+*.token

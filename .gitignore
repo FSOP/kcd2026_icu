@@ -1,0 +1,49 @@
+# MIMIC-IV 원자료 — DUA, 절대 커밋 금지
+datasets/
+
+# MIMIC-IV 파생 데이터 — 환자 수준 정보 포함 가능, 커밋 금지
+work/
+
+# 개인 분석 로그 및 보고서
+private_logs/
+private_reports/
+
+# 생성된 보고서 (집계 통계 포함 가능)
+iread/results/
+
+# 저작권 PDF
+papers/
+
+# Python/모델 파일
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pkl
+*.parquet
+*.csv
+*.csv.gz
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.pt
+*.pth
+*.onnx
+*.joblib
+
+# 인증/환경
+.env
+.env.*
+*.token
+*.key
+.aws/
+.codex/
+.agents/
+
+# 에디터/OS
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
